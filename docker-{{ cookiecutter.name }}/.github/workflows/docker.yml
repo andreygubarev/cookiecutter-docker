@@ -8,7 +8,7 @@ on:
       - "v*.*.*"
 
 env:
-  IMAGE_REGISTRY: ghcr.io
+  IMAGE_REGISTRY: {{ cookiecutter.registry }}
   IMAGE_NAMESPACE: {{ cookiecutter.namespace }}
   IMAGE_NAME: {{ cookiecutter.name }}
   IMAGE_PLATFORMS: linux/amd64,linux/arm64

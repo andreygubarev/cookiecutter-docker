@@ -2,5 +2,6 @@
     "name": "",
     "namespace": "",
     "description": "",
-    "author": ""
+    "author": "",
+    "registry": "ghcr.io"
 }
