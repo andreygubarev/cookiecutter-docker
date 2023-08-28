@@ -11,10 +11,14 @@ DOCKERFILE := Dockerfile
 
 DOCKER_REGISTRY := {{ cookiecutter.registry }}
 DOCKER_IMAGE := $(DOCKER_REGISTRY)/{{ cookiecutter.namespace }}/{{ cookiecutter.name }}
-DOCKER_TAG ?= $(shell git rev-parse --short HEAD)$(shell git diff-index --quiet HEAD -- || echo "-dirty")
+ifneq ($(shell git rev-parse --is-inside-work-tree 2>/dev/null),)
+    DOCKER_TAG ?= $(shell git rev-parse --short HEAD)$(shell git diff-index --quiet HEAD -- || echo "-dirty")
+else
+    DOCKER_TAG := latest
+endif
 
 DOCKER_PLATFORM ?= linux/amd64
 
 .PHONY: build
 build: ## Build the docker image
-	$(DOCKER) build --platform=$(DOCKER_PLATFORM) -f $(DOCKERFILE) -t $(DOCKER_IMAGE):$(DOCKER_tag) .
+	$(DOCKER) build --platform=$(DOCKER_PLATFORM) -f $(DOCKERFILE) -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
