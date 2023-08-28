@@ -13,6 +13,7 @@ env:
   IMAGE_NAME: {{ cookiecutter.name }}
   IMAGE_PLATFORMS: linux/amd64,linux/arm64
 
+{%- raw -%}
 jobs:
   docker:
     name: Build and push multi-arch image
@@ -54,3 +55,4 @@ jobs:
           platforms: ${{ env.IMAGE_PLATFORMS }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+{%- endraw -%}

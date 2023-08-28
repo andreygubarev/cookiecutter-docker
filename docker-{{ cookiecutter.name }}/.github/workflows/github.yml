@@ -5,6 +5,7 @@ on:
     tags:
       - "v*.*.*"
 
+{%- raw -%}
 jobs:
   github:
     permissions:
@@ -25,3 +26,4 @@ jobs:
         with:
           prerelease: ${{ steps.prerelease.outputs.prerelease }}
           generate_release_notes: true
+{%- endraw -%}
